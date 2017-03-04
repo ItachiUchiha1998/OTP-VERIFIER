@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  .main.container
+    .row
+      .col-md-6.col-md-offset-3
+        h1.display-4.m-b-2 OTP VERIFIER
+        form(method='POST' action='/verify')
+          div.form-group
+            label(for='number') Mobile Number: 
+            input.form-control(type='text' id='number' placeholder='1234567890' name='number')
+           
+          button.btn.btn-primary(type='submit') Send OTP

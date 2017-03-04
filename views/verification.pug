@@ -1,0 +1,14 @@
+extends layout
+block content
+   .main.container
+    .row
+      .col-md-6.col-md-offset-3
+        h1.display-4.m-b-2 OTP VERIFIER
+        form(method='POST' action='/message')
+          div.form-group
+            label(for='otp') Sent OTP: 
+            input.form-control(type='text' id='otp' placeholder='Input sent OTP..' name='otp')
+           
+          button.btn.btn-primary(type='submit') Verify
+
+
