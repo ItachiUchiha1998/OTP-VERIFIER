@@ -10,3 +10,5 @@ Register yourself on www.twilio.com replace AUTH_TOKEN,ACCOUNT_SID and PHONE_NUM
 and type npm start in terminal to start the project
 
 ...
+
+The country code can be changed to changing the value of countrycode variable in /routes/index.js
