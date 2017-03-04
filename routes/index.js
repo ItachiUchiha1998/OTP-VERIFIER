@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var app = express();
-var otp = require('otplib/lib/totp');
+var otp = require('otplib/lib/totp'); // module for generation of otp
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -12,17 +12,17 @@ router.get('/', function(req, res, next) {
   next();
 });
 
-router.post('/verify',function(req,res,next){
-	var countrycode = "+91"
+router.post('/',function(req,res,next){ // Get user's mobile number and send OTP
+	var countrycode = "+91" // May vary on basis of Country
 	var secret = otp.utils.generateSecret();
 	var code = otp.generate(secret);
- 	var client = require('twilio')('ACed53612b1b9277cfd1f41ae0bd94cc56','0d36b767cce1b3b94b16cceb2d076a80');
+ 	var client = require('twilio')('ACCOUNT_SID','AUTH_TOKEN'); // REGISTER IN TWILIO
 	client.sendSms({
     to: countrycode + req.body.number,
-    from:'+13312156302',
+    from:'PHONE_NUMBER', // TWILIO NUMBER
     body:  code
 	}, function(error, message) {
-    if (!error) {
+    if (!error) { // Check whether otp was sent successfully or not
         console.log('Success! The SID for this SMS message is:');
         console.log(message.sid);
         console.log('Message sent on:');
@@ -31,16 +31,10 @@ router.post('/verify',function(req,res,next){
         console.log('Oops! There was an error.');
     }
 	});
-	res.render('verification')
-	//
-	router.post('/message',function(req,res){
-	 if(code == req.body.otp) res.send('success');
+	router.post('/verify',function(req,res){ // Verification of OTP
+	 if(code == req.body.otp) res.send('success'); 
 	 else res.send('failure');	
 	 next();
  });
-	//
  });
-
-
-
 module.exports = router;
