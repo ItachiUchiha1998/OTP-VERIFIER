@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var app = express();
-var otp = require('otplib/lib/totp'); // module for generation of otp
+var otp = require('otplib/totp'); // module for generation of otp
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
